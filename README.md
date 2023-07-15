@@ -1,8 +1,3 @@
-# ifly_object_detection_pwd_top2_solution
-
-
-https://www.bilibili.com/video/BV1zj411K79W?p=19&vd_source=40f7ab970517b1db443394564af9679f
-
 ## 1. 环境配置
 
 本地运行的环境配置是针对linux系统和NVIDIA TITAN RTX显卡，如果测试时，遇到环境配置不符合，还请再联系
@@ -117,7 +112,7 @@ python preprocess/coco2txt.py
 注意需修改第4行与第6行对应的预测结果路径为上述jsonfile_prefix的路径
 
 ## 3. 算法方案介绍
-![](框架.jpg)
+![](framework.jpg)
 - 1.全自动多尺度数据增强：防止数据量较小，导致网络训练过拟合，首先通过旋转扩增样本，其次通过多尺度Resize，Randcrop等组合操作，使得模型自动学习有效的数据增强
 - 2.Swin transformer网络骨干：卷积网络的backbone难以有效捕获大尺寸遥感图像中的长距离空间依赖关系，由于transformer在计算机视觉中强大的特征提取能力以及长距离依赖能力，这里使用Swin transformer-base作为backbone，
 其中预训练模型采用在ImageNet 22k上的结果。

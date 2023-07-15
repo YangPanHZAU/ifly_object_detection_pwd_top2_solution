@@ -1,0 +1,2 @@
+cd code
+CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --nproc_per_node=2 --master_port=12345 tools/train.py PW_detection/htc_swin_b_pafpn_auto_aug_1x_pretrained_gn_ws_2x.py --launcher pytorch
