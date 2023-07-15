@@ -1,4 +1,5 @@
 # 2022 iFLYTEK A.I.开发者大赛-高分辨率遥感影像松林变色立木提取挑战赛第二名解决方案
+[<b>竞赛主页</b>](http://challenge.xfyun.cn/topic/info?type=standing-wood-extraction&ch=ds22-dw-zmt05),[<b>答辩视频</b>](https://www.bilibili.com/video/BV1zj411K79W?p=19&vd_source=40f7ab970517b1db443394564af9679f)
 
 Team id: 4cTRfEC4o
 ## 获奖方案
@@ -12,6 +13,7 @@ Team id: 4cTRfEC4o
 - 5.GN与ConvWS：在训练过程中batch size较小，采用GN代替BN的方式，来缓解batch较小导致的网络BN层失效，ConvWS用于 标准化卷积层中的权重，通过减少损失和梯度的 Lipschitz 常数来平滑损失情况
 - 6.SoftNMS与旋转测试增强：通过水平、垂直反转最终对检测的box进行投票并基于Soft-NMS后处理输出最终结果，有效缓解目标之间较小，位置偏移的问题。
 
+答辩视频链接：
 ## 1. 环境配置
 
 本地运行的环境配置是针对linux系统和NVIDIA TITAN RTX显卡，如果测试时，遇到环境配置不符合，还请再联系
