@@ -1,0 +1,4 @@
+-r code/requirements/build.txt
+-r code/requirements/optional.txt
+-r code/requirements/runtime.txt
+-r code/requirements/tests.txt
