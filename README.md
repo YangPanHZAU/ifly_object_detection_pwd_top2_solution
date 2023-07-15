@@ -1,3 +1,17 @@
+# 2022 iFLYTEK A.I.开发者大赛-高分辨率遥感影像松林变色立木提取挑战赛第二名解决方案
+
+Team id: 4cTRfEC4o
+## 获奖方案
+
+![](framework.jpg)
+- 1.全自动多尺度数据增强：防止数据量较小，导致网络训练过拟合，首先通过旋转扩增样本，其次通过多尺度Resize，Randcrop等组合操作，使得模型自动学习有效的数据增强
+- 2.Swin transformer网络骨干：卷积网络的backbone难以有效捕获大尺寸遥感图像中的长距离空间依赖关系，由于transformer在计算机视觉中强大的特征提取能力以及长距离依赖能力，这里使用Swin transformer-base作为backbone，
+其中预训练模型采用在ImageNet 22k上的结果。
+- 3.PAFPN：引入bottom-up path augmentation结构，充分利用网络浅特征进行分割；引入adaptive feature pooling使得提取到的ROI特征更加丰富。
+- 4.Hybrid Task Cascade架构：通过多任务多阶段的混合级联结构，不断对检测的box结果由粗到细迭代增强，对检测偏移的结果进行不断纠正，由于本任务使用的是目标检测架构，因此没有语义mask之间的特征交互。
+- 5.GN与ConvWS：在训练过程中batch size较小，采用GN代替BN的方式，来缓解batch较小导致的网络BN层失效，ConvWS用于 标准化卷积层中的权重，通过减少损失和梯度的 Lipschitz 常数来平滑损失情况
+- 6.SoftNMS与旋转测试增强：通过水平、垂直反转最终对检测的box进行投票并基于Soft-NMS后处理输出最终结果，有效缓解目标之间较小，位置偏移的问题。
+
 ## 1. 环境配置
 
 本地运行的环境配置是针对linux系统和NVIDIA TITAN RTX显卡，如果测试时，遇到环境配置不符合，还请再联系
@@ -111,12 +125,4 @@
 python preprocess/coco2txt.py
 注意需修改第4行与第6行对应的预测结果路径为上述jsonfile_prefix的路径
 
-## 3. 算法方案介绍
-![](framework.jpg)
-- 1.全自动多尺度数据增强：防止数据量较小，导致网络训练过拟合，首先通过旋转扩增样本，其次通过多尺度Resize，Randcrop等组合操作，使得模型自动学习有效的数据增强
-- 2.Swin transformer网络骨干：卷积网络的backbone难以有效捕获大尺寸遥感图像中的长距离空间依赖关系，由于transformer在计算机视觉中强大的特征提取能力以及长距离依赖能力，这里使用Swin transformer-base作为backbone，
-其中预训练模型采用在ImageNet 22k上的结果。
-- 3.PAFPN：引入bottom-up path augmentation结构，充分利用网络浅特征进行分割；引入adaptive feature pooling使得提取到的ROI特征更加丰富。
-- 4.Hybrid Task Cascade架构：通过多任务多阶段的混合级联结构，不断对检测的box结果由粗到细迭代增强，对检测偏移的结果进行不断纠正，由于本任务使用的是目标检测架构，因此没有语义mask之间的特征交互。
-- 5.GN与ConvWS：在训练过程中batch size较小，采用GN代替BN的方式，来缓解batch较小导致的网络BN层失效，ConvWS用于 标准化卷积层中的权重，通过减少损失和梯度的 Lipschitz 常数来平滑损失情况
-- 6.SoftNMS与旋转测试增强：通过水平、垂直反转最终对检测的box进行投票并基于Soft-NMS后处理输出最终结果，有效缓解目标之间较小，位置偏移的问题。
+
